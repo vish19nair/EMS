@@ -22,7 +22,7 @@ private String empname;
 @Column(nullable = true)
 private Integer manager;
 
-@OneToOne(cascade = CascadeType.ALL)
+@OneToOne
 @JoinColumn(name="desgnid")
 @JsonIgnore
 public Designation designation;
@@ -40,6 +40,7 @@ private String Jobtitle;
         this.manager=manager;
         this.empname=empName;
     }
+
 
 
     public Integer getEid() {

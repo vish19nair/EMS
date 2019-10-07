@@ -2,21 +2,15 @@ package com.Employes.Employedetail.controller;
 
 public class postRequest {
 
-    int empID=-1;
+
     String Empname;
     String empDesgn;
-    Integer ParentID;
+    Integer ParentID=null;
     boolean replace=false;
 
 
 
-    public int getEmpID() {
-        return empID;
-    }
 
-    public void setEmpID(int empID) {
-        this.empID = empID;
-    }
 
     public String getEmpname() {
         return Empname;
