@@ -1,12 +1,11 @@
 package com.Employes.Employedetail.controller;
 
-public class postRequest {
-
+public class putRequest {
 
     String Empname=null;
     String empDesgn=null;
     Integer ParentID=null;
-
+    boolean replace=false;
 
 
 
@@ -36,6 +35,12 @@ public class postRequest {
         ParentID = parentID;
     }
 
+    public boolean isReplace() {
+        return replace;
+    }
 
+    public void setReplace(boolean replace) {
+        this.replace = replace;
+    }
 
 }
