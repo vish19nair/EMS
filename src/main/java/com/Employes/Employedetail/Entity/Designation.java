@@ -1,6 +1,7 @@
 package com.Employes.Employedetail.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 
@@ -12,10 +13,12 @@ public class Designation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
+    @JsonProperty("id")
     @JsonIgnore
     private Integer desgnid;
 
     @Column
+    @JsonProperty("title")
     private  String designation;
 
     @Column

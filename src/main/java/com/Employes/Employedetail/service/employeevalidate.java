@@ -74,6 +74,7 @@ public class employeevalidate {
     public boolean userExists(Integer eid)
     {
         Employee emp=repo.findByEid(eid);
+
         if(emp!=null)
             return true;
         else
@@ -92,9 +93,8 @@ public class employeevalidate {
     {
         Designation designation=depo.findByDesignation(desg);
         return (designation!=null);
-
-
     }
+
     public boolean isValid(String name){
         if(name.trim().equals("") || name==null){
             return  false;

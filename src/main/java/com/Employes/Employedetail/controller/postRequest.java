@@ -2,40 +2,41 @@ package com.Employes.Employedetail.controller;
 
 public class postRequest {
 
+    public postRequest(){
 
-    String Empname=null;
-    String empDesgn=null;
-    Integer ParentID=null;
-
-
-
-
-
-
-    public String getEmpname() {
-        return Empname;
+    }
+    public postRequest(String name, String jobTitle, Integer managerId) {
+        this.name = name;
+        this.jobTitle = jobTitle;
+        this.managerId = managerId;
     }
 
-    public void setEmpname(String empname) {
-        this.Empname = empname;
+    String name=null;
+    String jobTitle=null;
+    Integer managerId=null;
+
+
+    public String getName() {
+        return name;
     }
 
-    public String getEmpDesgn() {
-        return empDesgn.toUpperCase();
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setEmpDesgn(String empDesgn) {
-        this.empDesgn = empDesgn;
+    public String getJobTitle() {
+        return jobTitle;
     }
 
-    public Integer getParentID() {
-        return ParentID;
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
     }
 
-    public void setParentID(Integer parentID) {
-        ParentID = parentID;
+    public Integer getManagerId() {
+        return managerId;
     }
 
-
-
+    public void setManagerId(Integer managerId) {
+        this.managerId = managerId;
+    }
 }

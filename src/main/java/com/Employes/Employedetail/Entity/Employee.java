@@ -1,6 +1,7 @@
 package com.Employes.Employedetail.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -13,9 +14,11 @@ public class Employee {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 @Column
+@JsonProperty("id")
 private int eid;
 
 @Column
+@JsonProperty("name")
 private String empname;
 
 

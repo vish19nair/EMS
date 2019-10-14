@@ -2,37 +2,43 @@ package com.Employes.Employedetail.controller;
 
 public class putRequest {
 
-    String Empname=null;
-    String empDesgn=null;
-    Integer ParentID=null;
+    String name=null;
+    String jobTitle=null;
+    Integer managerId=null;
     boolean replace=false;
 
+    public putRequest(){
 
-
-
-
-    public String getEmpname() {
-        return Empname;
+    }
+    public putRequest(String name, String jobTitle, Integer managerId, boolean replace) {
+        this.name = name;
+        this.jobTitle = jobTitle;
+        this.managerId = managerId;
+        this.replace = replace;
     }
 
-    public void setEmpname(String empname) {
-        this.Empname = empname;
+    public String getName() {
+        return name;
     }
 
-    public String getEmpDesgn() {
-        return empDesgn.toUpperCase();
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setEmpDesgn(String empDesgn) {
-        this.empDesgn = empDesgn;
+    public String getJobTitle() {
+        return jobTitle;
     }
 
-    public Integer getParentID() {
-        return ParentID;
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
     }
 
-    public void setParentID(Integer parentID) {
-        ParentID = parentID;
+    public Integer getManagerId() {
+        return managerId;
+    }
+
+    public void setManagerId(Integer managerId) {
+        this.managerId = managerId;
     }
 
     public boolean isReplace() {
@@ -42,5 +48,4 @@ public class putRequest {
     public void setReplace(boolean replace) {
         this.replace = replace;
     }
-
 }

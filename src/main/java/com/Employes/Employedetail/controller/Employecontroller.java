@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/rest")
 public class Employecontroller {
     @Autowired
     Employerepo repo;
@@ -33,34 +34,34 @@ public class Employecontroller {
 
 
     //get details of employee by ID
-    @GetMapping("/employee/{eid}")
+    @GetMapping("/employees/{eid}")
     public ResponseEntity getUser(@PathVariable("eid") Integer eid) {
         boolean userExists = servo.userExists(eid);
         if (userExists) {
             Map<String, Object> map = servo.getUserDetails(eid);
             return new ResponseEntity<>(map, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("Employee does't exists", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Employee doesn't exist", HttpStatus.NOT_FOUND);
         }
 
     }
 
 
     //Post the details Of the Employee
-    @PostMapping(path = "/rest/employees")
+    @PostMapping(path = "/employees")
     public ResponseEntity PostApi(@RequestBody postRequest employee) {
         return servo.addUser(employee);
     }
 
 
     //Put the details of the employee
-    @PutMapping(path = "/rest/update/employee/{empId}")
+    @PutMapping(path = "/employees/{empId}")
     public ResponseEntity putData(@PathVariable("empId") Integer empId, @RequestBody putRequest emp) {
         return servo.updateUser(empId, emp);
     }
 
     //delete Employees By  Their ID
-    @DeleteMapping(value = "/employee/{eid}")
+    @DeleteMapping(value = "/employees/{eid}")
     public ResponseEntity deleteApi(@PathVariable Integer eid) {
         ResponseEntity entity = servo.deleteUser(eid);
         return entity;

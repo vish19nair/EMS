@@ -25,6 +25,7 @@ public class employeeservice extends employeevalidate{
 //GET THE DETAILS OF EMPLOYEES USING ID
         public Map<String, Object> getUserDetails(Integer eid)
         {
+
             Employee manager=null;
             List<Employee> colleagues=null;
             Map<String,Object> map=new LinkedHashMap<>();
@@ -64,7 +65,7 @@ public class employeeservice extends employeevalidate{
             if(userExists)
             {
                 Employee emp=repo.findByEid(eid);
-                if(emp.getDesignation().equals("director"))
+                if(emp.getDesignation().getDesignation().equals("DIRECTOR"))
                 {
                     List<Employee> list=repo.findAllByManager(emp.getEid());
                     if(hasData(list))
@@ -81,7 +82,7 @@ public class employeeservice extends employeevalidate{
                 }
                 else
                 {
-                    int parentId=emp.getManager();
+                    Integer parentId=emp.getManager();
                     List<Employee> childs=repo.findAllByManager(emp.getEid());
                     for(Employee employee:childs)
                     {
@@ -94,16 +95,20 @@ public class employeeservice extends employeevalidate{
             }
             else
             {
-                return new ResponseEntity("Employee Does't Exists",HttpStatus.BAD_REQUEST);
+                return new ResponseEntity("Employee Doesn't Exists",HttpStatus.NOT_FOUND);
             }
         }
 //CREATE NEW USER AND ADD IT INTO EMS
         public ResponseEntity addUser(postRequest employee)
         {
-            String empName=employee.getEmpname();
-            String desg=employee.getEmpDesgn();
-            Integer parentId=employee.getParentID();
+            String empName=employee.getName();
+            String desg=employee.getJobTitle();
+            Integer parentId=employee.getManagerId();
+          if(empName==null && desg==null && parentId==null){
+              return new ResponseEntity("Please Enter valid data",HttpStatus.BAD_REQUEST);
+          }
          if(desg!=null) {
+
              if (!isDesignationValid(desg)) {
                  return new ResponseEntity("Please Enter Valid Designation", HttpStatus.BAD_REQUEST);
              }
@@ -118,16 +123,16 @@ public class employeeservice extends employeevalidate{
          if(parentId==null) {
                 Employee director = repo.findByManager(null);
                 if (director != null) {
-                    return new ResponseEntity("Director Already Exists ParentId cannot be NULL", HttpStatus.BAD_REQUEST);
+                    return new ResponseEntity("Director Already Exists ParentId cannot be NULL", HttpStatus.FORBIDDEN);
                 }
                 else
                 {
-                    if(desg.equals("director"))
+                    if(desg.equals("DIRECTOR"))
                     {
                         Designation designation=depo.findByDesignation(desg);
                         Employee emp=new Employee(designation,parentId,empName);
                         repo.save(emp);
-                        return new ResponseEntity("Employee Created",HttpStatus.CREATED);
+                        return new ResponseEntity("Employee added successfully",HttpStatus.OK);
                     }
                     else
                     {
@@ -156,11 +161,11 @@ public class employeeservice extends employeevalidate{
                     {
                         Employee emp=new Employee(designation,parentId,empName);
                         repo.save(emp);
-                        return new ResponseEntity("Employee Created",HttpStatus.CREATED);
+                        return new ResponseEntity("Employee added successfully",HttpStatus.OK);
                     }
                     else
                     {
-                        return new ResponseEntity(desg+" cannot be child of "+parentRecord.getDesignation(),HttpStatus.BAD_REQUEST);
+                        return new ResponseEntity(desg+" cannot be child of "+parentRecord.getDesignation().getDesignation(),HttpStatus.BAD_REQUEST);
                     }
                 }
             }
@@ -169,9 +174,10 @@ public class employeeservice extends employeevalidate{
         public ResponseEntity updateUser(Integer eid, putRequest emp)
         {
             //User Is Present
+
             if(userExists(eid))
             {
-                String userDesignation=emp.getEmpDesgn();
+                String userDesignation=emp.getJobTitle();
 
                 if(emp.isReplace())
                 {
@@ -182,7 +188,7 @@ public class employeeservice extends employeevalidate{
                         if (!isDesignationValid(userDesignation))
                             return new ResponseEntity("Designation does't exists! Please enter valid designation",HttpStatus.BAD_REQUEST);
                     }
-                    if(!isValid(emp.getEmpname())){
+                    if(!isValid(emp.getName())){
                         return new ResponseEntity("ENTER VALID NAME",HttpStatus.BAD_REQUEST);
                     }
                     Integer parent=null;
@@ -191,7 +197,7 @@ public class employeeservice extends employeevalidate{
                     {
                         parent=employee.getManager();
                         repo.delete(employee);
-                        Employee tempEmployee=new Employee(depo.findByDesignation(userDesignation),parent,emp.getEmpname());
+                        Employee tempEmployee=new Employee(depo.findByDesignation(userDesignation),parent,emp.getName());
                         repo.save(tempEmployee);
                         List<Employee> list=repo.findAllByManager(eid);
                         for(Employee empTemp:list)
@@ -207,7 +213,7 @@ public class employeeservice extends employeevalidate{
                 else
                 {
                     Employee employee=repo.findByEid(eid);
-                    Integer parentId=emp.getParentID();
+                    Integer parentId=emp.getManagerId();
 
                     if(userDesignation!=null)
                     {
@@ -225,8 +231,8 @@ public class employeeservice extends employeevalidate{
                             }
                         }
                     }
-                    if(emp.getEmpname()!=null){
-                        if(emp.getEmpname().trim().equals("")){
+                    if(emp.getName()!=null){
+                        if(emp.getName().trim().equals("")){
                             return new ResponseEntity("NAME CANNOT BE EMPTY",HttpStatus.BAD_REQUEST);
                         }
                     }
@@ -254,9 +260,9 @@ public class employeeservice extends employeevalidate{
                     }
 
                    */
-                    if(emp.getEmpname()!=null)
+                    if(emp.getName()!=null)
                     {
-                        employee.setEmpname(emp.getEmpname());
+                        employee.setEmpname(emp.getName());
                     }
                     repo.save(employee);
                     return new ResponseEntity("User Updated",HttpStatus.OK);
@@ -269,10 +275,6 @@ public class employeeservice extends employeevalidate{
             }
 
         }
-
-
-
-
     }
 
 
