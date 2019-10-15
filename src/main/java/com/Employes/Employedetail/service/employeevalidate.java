@@ -96,12 +96,34 @@ public class employeevalidate {
     }
 
     public boolean isValid(String name){
-        if(name.trim().equals("") || name==null){
-            return  false;
+        if(name!=null)
+        {
+            if(name.trim().equals(""))
+            {
+                return false;
+            }
+            else if(name.matches(".*\\d.*"))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
-        else{
-            return true;
+        else
+        {
+            return false;
         }
+    }
+
+    public boolean isValidId(Integer id){
+      if(id.intValue()<0){
+          return  false;
+      }
+      else{
+          return true;
+      }
     }
 
 }

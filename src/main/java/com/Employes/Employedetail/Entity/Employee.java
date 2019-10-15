@@ -38,7 +38,7 @@ private String Jobtitle;
 
     }
 
-    public Employee(Designation designation, int manager, String empName) {
+    public Employee(Designation designation, Integer manager, String empName) {
         this.designation=designation;
         this.manager=manager;
         this.empname=empName;

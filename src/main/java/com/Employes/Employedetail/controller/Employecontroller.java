@@ -36,14 +36,7 @@ public class Employecontroller {
     //get details of employee by ID
     @GetMapping("/employees/{eid}")
     public ResponseEntity getUser(@PathVariable("eid") Integer eid) {
-        boolean userExists = servo.userExists(eid);
-        if (userExists) {
-            Map<String, Object> map = servo.getUserDetails(eid);
-            return new ResponseEntity<>(map, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Employee doesn't exist", HttpStatus.NOT_FOUND);
-        }
-
+      return servo.getUserDetails(eid);
     }
 
 
@@ -56,7 +49,8 @@ public class Employecontroller {
 
     //Put the details of the employee
     @PutMapping(path = "/employees/{empId}")
-    public ResponseEntity putData(@PathVariable("empId") Integer empId, @RequestBody putRequest emp) {
+    public ResponseEntity putData(@PathVariable("empId") Integer empId, @RequestBody putRequest emp)
+    {
         return servo.updateUser(empId, emp);
     }
 

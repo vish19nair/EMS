@@ -13,4 +13,5 @@ public interface Employerepo extends CrudRepository<Employee,Integer> {
     public List<Employee> findAllByOrderByDesignation_levelAscEmpnameAsc();
     public List<Employee> findAllByManagerAndEidIsNot(int parentID, Integer empName);
     List<Employee> findAllByManagerOrderByDesignation_levelAsc(Integer eid);
+    List<Employee> findAllByManagerAndEidIsNotOrderByDesignation_levelAscEmpnameAsc(Integer parentID,Integer eid);
 }
