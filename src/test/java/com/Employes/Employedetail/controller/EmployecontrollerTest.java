@@ -95,7 +95,7 @@ public class EmployecontrollerTest extends AbstractTransactionalTestNGSpringCont
     @Test(priority = 1)
     public void directorValidationForManager() throws Exception                //Assigning director with manager
     {
-        postRequest p1 =new postRequest("wonder woman","DIRECTOR",2);
+        postRequest p1 =new postRequest("wonder woman","Director",2);
         ObjectMapper mapper=new ObjectMapper();
         String jsonInput=mapper.writeValueAsString(p1);
         mvc.perform(MockMvcRequestBuilders.post("/rest/employees").content(jsonInput).contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -105,7 +105,7 @@ public class EmployecontrollerTest extends AbstractTransactionalTestNGSpringCont
     @Test
     public void multipleDirector() throws Exception                             //Adding second Director Work On THIS
     {
-        postRequest p1 =new postRequest("wonder woman","DIRECTOR",2);
+        postRequest p1 =new postRequest("wonder woman","Director",2);
         ObjectMapper mapper=new ObjectMapper();
         String jsonInput=mapper.writeValueAsString(p1);
         mvc.perform(MockMvcRequestBuilders.post("/rest/employees").content(jsonInput).contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -135,7 +135,7 @@ public class EmployecontrollerTest extends AbstractTransactionalTestNGSpringCont
     @Test
     public void invalidParentId () throws Exception                //Adding employee with non existing manager
     {
-        postRequest p1 =new postRequest("wonder woman","LEAD",-2);
+        postRequest p1 =new postRequest("wonder woman","Lead",-2);
         ObjectMapper mapper=new ObjectMapper();
         String jsonInput=mapper.writeValueAsString(p1);
         mvc.perform(MockMvcRequestBuilders.post("/rest/employees").content(jsonInput).contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -144,7 +144,7 @@ public class EmployecontrollerTest extends AbstractTransactionalTestNGSpringCont
     @Test
     public void hierarchyViolation () throws Exception                //Adding employee with violating organisation hierarchy
     {
-        postRequest p1 =new postRequest("wonder woman","LEAD",8);
+        postRequest p1 =new postRequest("wonder woman","Lead",8);
         ObjectMapper mapper=new ObjectMapper();
         String jsonInput=mapper.writeValueAsString(p1);
         mvc.perform(MockMvcRequestBuilders.post("/rest/employees").content(jsonInput).contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -158,7 +158,7 @@ public class EmployecontrollerTest extends AbstractTransactionalTestNGSpringCont
     @Test
     public void invalidDesignation () throws Exception                //Adding employee with non existing Designation
     {
-        postRequest p1 =new postRequest("wonder woman","LAED",12);
+        postRequest p1 =new postRequest("wonder woman","Laed",12);
         ObjectMapper mapper=new ObjectMapper();
         String jsonInput=mapper.writeValueAsString(p1);
         mvc.perform(MockMvcRequestBuilders.post("/rest/employees").content(jsonInput).contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -212,7 +212,7 @@ public class EmployecontrollerTest extends AbstractTransactionalTestNGSpringCont
                     .andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
         }
 
-         postRequest p2=new postRequest("wonder woman","DIRECTOR",null);
+         postRequest p2=new postRequest("wonder woman","Director",null);
         ObjectMapper mapper=new ObjectMapper();
         String jsonInput=mapper.writeValueAsString(p2);
         mvc.perform(MockMvcRequestBuilders.post("/rest/employees").content(jsonInput).contentType(MediaType.APPLICATION_JSON_VALUE)).andDo(print())
@@ -230,7 +230,7 @@ public class EmployecontrollerTest extends AbstractTransactionalTestNGSpringCont
                     .andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
         }
 
-        postRequest p2=new postRequest("wonder woman","MANAGER",null);
+        postRequest p2=new postRequest("wonder woman","Manager",null);
         ObjectMapper mapper=new ObjectMapper();
         String jsonInput=mapper.writeValueAsString(p2);
         mvc.perform(MockMvcRequestBuilders.post("/rest/employees").content(jsonInput).contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -244,7 +244,7 @@ public class EmployecontrollerTest extends AbstractTransactionalTestNGSpringCont
     @Test
     public void updateEmpInvalidId() throws Exception
     {
-        putRequest employee = new putRequest("Rajat","MANAGER",2,false);
+        putRequest employee = new putRequest("Rajat","Manager",2,false);
         ObjectMapper mapper = new ObjectMapper();
         String jsonInput = mapper.writeValueAsString(employee);
         mvc.perform(MockMvcRequestBuilders.put("/rest/employees/13").content(jsonInput).contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -262,7 +262,7 @@ public class EmployecontrollerTest extends AbstractTransactionalTestNGSpringCont
     @Test
     public void updateEmpInvalidParId() throws Exception
     {
-        putRequest employee = new putRequest("Mohit","LEAD",12343,false);
+        putRequest employee = new putRequest("Mohit","Lead",12343,false);
         ObjectMapper mapper = new ObjectMapper();
         String jsonInput = mapper.writeValueAsString(employee);
         mvc.perform(MockMvcRequestBuilders.put("/rest/employees/2").content(jsonInput).contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -271,7 +271,7 @@ public class EmployecontrollerTest extends AbstractTransactionalTestNGSpringCont
     @Test
     public void updateEmpPromotion() throws Exception           //error happened 2
     {
-        putRequest employee = new putRequest("Mohit","DIRECTOR",1,false);
+        putRequest employee = new putRequest("Mohit","Director",1,false);
         ObjectMapper mapper = new ObjectMapper();
         String jsonInput = mapper.writeValueAsString(employee);
         mvc.perform(MockMvcRequestBuilders.put("/rest/employees/2").content(jsonInput).contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -290,7 +290,7 @@ public class EmployecontrollerTest extends AbstractTransactionalTestNGSpringCont
     @Test
     public void updateEmpDemoteDirector() throws Exception       //error 3
     {
-        putRequest employee = new putRequest(null,"LEAD",null,false);
+        putRequest employee = new putRequest(null,"Lead",null,false);
         ObjectMapper mapper = new ObjectMapper();
         String jsonInput = mapper.writeValueAsString(employee);
         mvc.perform(MockMvcRequestBuilders.put("/rest/employees/1").content(jsonInput).contentType(MediaType.APPLICATION_JSON_VALUE))
