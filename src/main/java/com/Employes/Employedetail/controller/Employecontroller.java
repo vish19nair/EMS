@@ -33,7 +33,7 @@ public class Employecontroller {
     }
 
 
-    //get details of employee by ID
+    //Get details of employee by ID
     @GetMapping("/employees/{eid}")
     public ResponseEntity getUser(@PathVariable("eid") Integer eid) {
       return servo.getUserDetails(eid);

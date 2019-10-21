@@ -7,13 +7,13 @@ import com.Employes.Employedetail.repository.Employerepo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
-
+//VALIDATIONS FOR SIMPLE VALIDATIONS DONE IN SERVICE CLASS
 public class employeevalidate {
     @Autowired
     Employerepo repo;
     @Autowired
     DesignationRepo depo;
-
+//CHECKING DESIGNATIONS IS GREATER OR NOT THEN PRESENT DESIGNATIONS
     public boolean isGreaterThanEqualCurrentDesignation(Integer eid,String desg)
     {
         Employee employee=repo.findByEid(eid);
@@ -24,7 +24,7 @@ public class employeevalidate {
         else
             return false;
     }
-
+//CHECKING CURRENT EMPLOYEE IS SMALLER THEN MANAGER DESIGNATION OR NOT
     public boolean isSmallerThanParent(Integer eid,String desg)
     {
         Employee employee=repo.findByEid(eid);
@@ -40,7 +40,7 @@ public class employeevalidate {
         else
             return true;
     }
-
+//CHECKING DESIGNATION IS GREATER THEN PRESENT DESIGNATION OR NOT
     public boolean isGreaterThanChilds(Integer eid,String desg)
     {
         float selfLevel=depo.findByDesignation(desg).getLevel();
@@ -58,6 +58,7 @@ public class employeevalidate {
             return true;
         }
     }
+    //IF THE DESIGNATION IS GREATER THEN CURRENT DESIGNATION OR NOT
     public boolean isGreaterThanCurrentDesignation(Integer eid,String desg)
     {
         Employee employee=repo.findByEid(eid);
@@ -70,7 +71,7 @@ public class employeevalidate {
         else
             return false;
     }
-
+//IF EMPLOYEE EXISTS OR NOT FOR GIVEN ID
     public boolean userExists(Integer eid)
     {
         Employee emp=repo.findByEid(eid);
@@ -80,7 +81,7 @@ public class employeevalidate {
         else
             return false;
     }
-
+//EMPLOYEE TABLE HAS DATA PRESENT OR NOT
     public boolean hasData(List<Employee> list)
     {
         if(list.size()>0)
@@ -94,7 +95,7 @@ public class employeevalidate {
         Designation designation=depo.findByDesignation(desg);
         return (designation!=null);
     }
-
+//NAME IS VALID OR NOT
     public boolean isValid(String name){
         if(name!=null)
         {
@@ -116,7 +117,7 @@ public class employeevalidate {
             return false;
         }
     }
-
+//ID IS VALID OR NOT
     public boolean isValidId(Integer id){
       if(id.intValue()<0){
           return  false;

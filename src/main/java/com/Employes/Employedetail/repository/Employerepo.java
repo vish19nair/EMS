@@ -4,7 +4,7 @@ import com.Employes.Employedetail.Entity.Employee;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
-
+//REPO CLASS WHICH IMPLEMENTS THE CRUD FUNCTIONALITY IN DATABASE
 public interface Employerepo extends CrudRepository<Employee,Integer> {
     public List<Employee> findAll();
     public Employee findByEid(Integer eid);

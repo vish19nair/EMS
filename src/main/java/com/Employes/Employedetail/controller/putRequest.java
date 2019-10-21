@@ -1,5 +1,5 @@
 package com.Employes.Employedetail.controller;
-
+//CLASS FOR PUT REQUEST FOR WHICH THE CLIENT COULD MAKE UPDATIONS
 public class putRequest {
 
     String name=null;

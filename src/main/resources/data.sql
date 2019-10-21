@@ -6,6 +6,7 @@ INSERT INTO Designation VALUES (5,'DevOps',30);
 INSERT INTO Designation VALUES (6,'QA',30);
 INSERT INTO Designation VALUES (7,'Intern',40);
 
+
 /*
 INSERT INTO Employee  VALUES (1,'THOR',NULL ,1 );
 INSERT INTO Employee VALUES (2,'IRONMAN',1,2);

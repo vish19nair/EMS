@@ -1,5 +1,5 @@
 package com.Employes.Employedetail.controller;
-
+//CLASS FOR POST REQUEST WHICH WOULD BE PASSED BY CLIENT
 public class postRequest {
 
     public postRequest(){

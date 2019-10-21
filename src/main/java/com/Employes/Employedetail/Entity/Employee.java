@@ -6,31 +6,32 @@ import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
-
+//EMPLOYEE WHICH STORES THE DETAILS OF EMPLOYEE
 @Entity
 @Table
 public class Employee {
-
+// EMPLOYEE ID OF THE EMPLOYEE
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 @Column
 @JsonProperty("id")
 private int eid;
-
+//NAME OF THE EMPLOYEE
 @Column
 @JsonProperty("name")
 private String empname;
 
-
+//MANAGER OF THE EMPLOYEE
 @Column(nullable = true)
 private Integer manager;
 
+//DESIGNATION ID OF THE EMPLOYEE
 @OneToOne
 @JoinColumn(name="desgnid")
 @JsonIgnore
 public Designation designation;
 
-
+//JOB TITLE OF THE EMPLOYEE
 @Transient
 private String Jobtitle;
 
@@ -45,7 +46,7 @@ private String Jobtitle;
     }
 
 
-
+//GETTERS AND SETTERS FOR GETTING AND SETTING THE DETAILS IN THE TABLE
     public Integer getEid() {
         return eid;
     }
